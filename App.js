@@ -8,6 +8,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import Test from './src/containers/app';
+
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -30,6 +32,8 @@ export default class App extends React.Component {
         <TouchableOpacity style={styles.buttonStyle} >
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>
+
+        <Test />
       </View>
     );
   }
