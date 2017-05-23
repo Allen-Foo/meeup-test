@@ -8,23 +8,73 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import Firebase from 'firebase';
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAg77DQ5EUeT9LXeOKIgZ74jamqPKNHV3w",
+  authDomain: "meeup-test-4cf00.firebaseapp.com",
+  databaseURL: "https://meeup-test-4cf00.firebaseio.com",
+  projectId: "meeup-test-4cf00",
+  storageBucket: "meeup-test-4cf00.appspot.com",
+  messagingSenderId: "614047587922"
+};
+
+const firebaseApp = Firebase.initializeApp(firebaseConfig);
+
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state ={
+      profile: {}
+    }
+    this.itemsRef = this.getRef().child('profile');
+  }
+
+
+  getRef() {
+    return firebaseApp.database().ref();
+  }
+
+  listenForItems(itemsRef) {
+    itemsRef.on('value', (snap) => {
+
+      this.setState({
+        profile: snap.val()
+      });
+
+    });
+  }
+
+  componentDidMount() {
+    this.listenForItems(this.itemsRef)
+  }
+
   render() {
+    const {
+      first_name = '',
+      last_name = '',
+      company = '',
+      department = '',
+      position = '',
+      email = '',
+    } = this.state.profile
+
     return (
       <View style={styles.container}>
-        <ProfileRow title={'First Name'} />
-        <ProfileRow title={'Last Name'} />
+        <ProfileRow title={'First Name'} value={first_name}/>
+        <ProfileRow title={'Last Name'} value={last_name}/>
         <ProfileSeparator />
 
-        <ProfileRow title={'Company'} />
-        <ProfileRow title={'Department'} />
-        <ProfileRow title={'Position'} />
+        <ProfileRow title={'Company'} value={company}/>
+        <ProfileRow title={'Department'} value={department}/>
+        <ProfileRow title={'Position'} value={position}/>
         <ProfileSeparator />
 
-        <ProfileRow title={'Email'} />
+        <ProfileRow title={'Email'} value={email}/>
         <ProfileSeparator />
 
         <TouchableOpacity style={styles.buttonStyle} >
@@ -36,12 +86,13 @@ export default class App extends React.Component {
 }
 
 const ProfileRow = props => {
-  const { title } = props
+  const { title, value } = props
 
   return (
     <View style={styles.row}>
       <Text style={styles.title}>{title}</Text>
       <TextInput 
+        value={value}
         style={styles.textInput}
         underlineColorAndroid={'transparent'}
       />
