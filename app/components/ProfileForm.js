@@ -4,7 +4,7 @@ import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-nati
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux'
 
-import {load as loadProfile} from '../reducers/profile'
+import {load as loadProfile} from '../reducers/profileReducer'
 import FormTextInput from './FormTextInput';
 
 const data = {
@@ -102,7 +102,7 @@ ProfileForm = reduxForm({
 // You have to connect() to any reducers that you wish to connect to yourself
 ProfileForm = connect(
   state => ({
-    initialValues: state.profile.data // pull initial values from profile reducer
+    initialValues: state.profileReducer.data // pull initial values from profile reducer
   }),
   {load: loadProfile} // bind loadProfile loading action creator
 )(ProfileForm)

@@ -1,7 +1,7 @@
 // Quack! This is a duck. https://github.com/erikras/ducks-modular-redux
 const LOAD = 'redux-form-examples/account/LOAD'
 
-const profile = (state = {}, action) => {
+const profileReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD:
       return {
@@ -17,4 +17,4 @@ const profile = (state = {}, action) => {
  */
 export const load = data => ({type: LOAD, data})
 
-export default profile
+export default profileReducer
