@@ -25,6 +25,8 @@ const firebaseApp = Firebase.initializeApp(firebaseConfig);
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
+import Profile from './app/pages/Profile'
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -65,21 +67,7 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        <ProfileRow title={'First Name'} value={first_name}/>
-        <ProfileRow title={'Last Name'} value={last_name}/>
-        <ProfileSeparator />
-
-        <ProfileRow title={'Company'} value={company}/>
-        <ProfileRow title={'Department'} value={department}/>
-        <ProfileRow title={'Position'} value={position}/>
-        <ProfileSeparator />
-
-        <ProfileRow title={'Email'} value={email}/>
-        <ProfileSeparator />
-
-        <TouchableOpacity style={styles.buttonStyle} >
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableOpacity>
+        <Profile />
       </View>
     );
   }
