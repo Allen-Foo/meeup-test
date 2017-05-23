@@ -1,11 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { 
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Dimensions,
+  TouchableOpacity
+} from 'react-native';
+
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ProfileRow title={'Name'} />
+        <ProfileRow title={'First Name'} />
+        <ProfileRow title={'Last Name'} />
+        <ProfileSeparator />
+
+        <ProfileRow title={'Company'} />
+        <ProfileRow title={'Department'} />
+        <ProfileRow title={'Position'} />
+        <ProfileSeparator />
+
+        <ProfileRow title={'Email'} />
+        <ProfileSeparator />
+
+        <TouchableOpacity style={styles.buttonStyle} >
+          <Text style={styles.buttonText}>Save</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -16,7 +40,7 @@ const ProfileRow = props => {
 
   return (
     <View style={styles.row}>
-      <Text style={styles.title}>Name</Text>
+      <Text style={styles.title}>{title}</Text>
       <TextInput 
         style={styles.textInput}
         underlineColorAndroid={'transparent'}
@@ -25,29 +49,49 @@ const ProfileRow = props => {
   )
 }
 
+const ProfileSeparator = () => {
+  return (
+    <View style={styles.separator} />
+  )
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row'
+    paddingTop: 25,
   },
   row: {
-    flex: 1,
+    height: 40,
     justifyContent: 'space-between',
     flexDirection: 'row',
     paddingHorizontal: 10,
     borderBottomWidth: 1,
-    borderColor: 'grey'
+    borderColor: '#eee',
+    alignItems: 'center'
   },
   title: {
     fontSize: 16
   },
   textInput: {
-    fontSize: 16,
-    color: 'blue',
-    minWidth: 10,
-    maxWidth: 200
+    fontSize: 18,
+    color: '#00f',
+    textAlign: 'right',
+    width: SCREEN_WIDTH * 0.5,
+  },
+  separator: {
+    height: 10,
+    backgroundColor: '#eee'
+  },
+  buttonStyle: {
+    backgroundColor: '#698eff',
+    marginTop: 20,
+    alignSelf: 'center',
+    borderRadius: 3
+  },
+  buttonText: {
+    paddingHorizontal: 25,
+    paddingVertical: 5,
+    color: '#fff'
   }
 });
