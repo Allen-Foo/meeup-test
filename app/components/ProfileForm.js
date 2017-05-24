@@ -61,9 +61,6 @@ class ProfileForm extends React.Component {
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonStyle} onPress={() => this.props.load(data)}>
-          <Text style={styles.buttonText}>Load</Text>
-        </TouchableOpacity>
       </ScrollView>
     );
   }
