@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import ProfileForm from '../components/ProfileForm';
+import ProfileForm from './ProfileForm';
 import FirebaseTool from '../lib/FirebaseTool'
 
 /**

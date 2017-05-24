@@ -5,19 +5,9 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux'
 
 import {load as loadProfile} from '../reducers/profileReducer'
-import FormTextInput from './FormTextInput';
+import FormTextInput from '../components/FormTextInput';
 
 import FirebaseTool from '../lib/FirebaseTool'
-
-const data = {
-  // used to populate "account" reducer when "Load" is clicked
-  first_name: 'Jane',
-  last_name: 'Doe',
-  company: 'Facebook',
-  department: 'HR',
-  position: 'manager',
-  email: 'test@test.com',
-}
 
 class ProfileForm extends React.Component {
   constructor(props) {
