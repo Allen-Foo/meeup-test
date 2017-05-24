@@ -19,6 +19,7 @@ export default function FormTextInput(props) {
         onBlur={input.onBlur}
         onFocus={input.onFocus}
         value={input.value}
+        underlineColorAndroid={'transparent'}
         />
     </View>
   );
