@@ -14,6 +14,7 @@ const firebaseApp = Firebase.initializeApp(firebaseConfig);
 
 let _instance = null
 
+// reference: https://github.com/davideast/firebase-react-native-sample/blob/master/index.ios.js
 class FirebaseTool {
   static getInstance() {
     if(_instance == null) {
@@ -32,14 +33,15 @@ class FirebaseTool {
     return firebaseApp.database().ref();
   }
 
-  async loadProfile() {
+  loadProfile(callback) {
     // Listens for exactly one event of the specified event type, 
     // and then stops listening.
-    // this.itemsRef.once(value)
-    //   .then((snap) => snap.val())
-    //   .catch((err) => console.warn('err', err))
-    let profile = await this.itemsRef.once('value')
-    return profile.val()
+    this.itemsRef.once('value')
+      .then((snap) => callback(snap.val()))
+      .catch((err) => console.warn('err', err))
+    // let profile = await this.itemsRef.once('value')
+    // console.warn('profile', profile)
+    // return profile.val()
   }
 
   // Atomically modifies the data at this location.

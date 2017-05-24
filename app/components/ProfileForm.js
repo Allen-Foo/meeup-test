@@ -19,30 +19,37 @@ const data = {
   email: 'test@test.com',
 }
 
-function ProfileForm(props) {
-  return (
-    <ScrollView keyboardShouldPersistTaps={'handled'}>
-      <ProfileRow title={'First Name'} name={'first_name'}/>
-      <ProfileRow title={'Last Name'} name={'last_name'}/>
-      <ProfileSeparator />
+class ProfileForm extends React.Component {
+  componentWillMount() {
+    FirebaseTool.loadProfile(this.props.load);
+  }
 
-      <ProfileRow title={'Company'} name={'company'}/>
-      <ProfileRow title={'Department'} name={'department'}/>
-      <ProfileRow title={'Position'} name={'position'}/>
-      <ProfileSeparator />
+  render() {
+    return (
+      <ScrollView keyboardShouldPersistTaps={'handled'}>
+        <ProfileRow title={'First Name'} name={'first_name'}/>
+        <ProfileRow title={'Last Name'} name={'last_name'}/>
+        <ProfileSeparator />
 
-      <ProfileRow title={'Email'} name={'email'}/>
-      <ProfileSeparator />
+        <ProfileRow title={'Company'} name={'company'}/>
+        <ProfileRow title={'Department'} name={'department'}/>
+        <ProfileRow title={'Position'} name={'position'}/>
+        <ProfileSeparator />
 
-      <TouchableOpacity style={styles.buttonStyle} onPress={props.handleSubmit}>
-        <Text style={styles.buttonText}>Save</Text>
-      </TouchableOpacity>
+        <ProfileRow title={'Email'} name={'email'}/>
+        <ProfileSeparator />
 
-      <TouchableOpacity style={styles.buttonStyle} onPress={() => props.load(data)}>
-        <Text style={styles.buttonText}>Load</Text>
-      </TouchableOpacity>
-    </ScrollView>
-  );
+        <TouchableOpacity style={styles.buttonStyle} onPress={this.props.handleSubmit}>
+          <Text style={styles.buttonText}>Save</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonStyle} onPress={() => this.props.load(data)}>
+          <Text style={styles.buttonText}>Load</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    );
+  }
+  
 }
 
 const ProfileRow = props => {
@@ -98,7 +105,7 @@ const styles = StyleSheet.create({
 // reference: http://redux-form.com/6.7.0/examples/initializeFromState/
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 ProfileForm = reduxForm({
-  form: 'editProfile' // a unique identifier for this form
+  form: 'editProfile', // a unique identifier for this form
 })(ProfileForm)
 
 // You have to connect() to any reducers that you wish to connect to yourself

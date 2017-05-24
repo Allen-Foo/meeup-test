@@ -12,15 +12,13 @@ import FirebaseTool from '../lib/FirebaseTool'
  *
  */
 export default class Profile extends React.Component {
+
   render() {
     return (
       <View style={styles.container}>
-        <ProfileForm 
-          initialValues={() => FirebaseTool.loadProfile()}
-          onSubmit={(values) => FirebaseTool.updateProfile(values)}
-        />
+        <ProfileForm onSubmit={(values) => FirebaseTool.updateProfile(values)} />
       </View>
-    );
+    )
   }
 }
 
