@@ -6,7 +6,7 @@ import * as reducers from '../reducers';
 import { createStore, combineReducers } from 'redux';
 
 import ProfileForm from '../components/ProfileForm';
-import FirebaseHelper from '../lib/FirebaseHelper'
+import FirebaseTool from '../lib/FirebaseTool'
 
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
@@ -22,7 +22,7 @@ export default class Profile extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <ProfileForm onSubmit={(values) => new FirebaseHelper().updateProfile(values)}/>
+        <ProfileForm onSubmit={(values) => FirebaseTool.updateProfile(values)}/>
       </Provider>
     );
   }

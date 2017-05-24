@@ -12,12 +12,16 @@ const firebaseConfig = {
 
 const firebaseApp = Firebase.initializeApp(firebaseConfig);
 
-export default class FirebaseHelper {
+let _instance = null
+
+class FirebaseTool {
   static getInstance() {
     if(_instance == null) {
-      _instance = new FirebaseHelper()
+      _instance = new FirebaseTool()
       _instance.constructor = null
     }
+
+    return _instance
   }
 
   constructor() {
@@ -56,3 +60,5 @@ export default class FirebaseHelper {
     });
   }
 }
+
+export default FirebaseTool.getInstance()

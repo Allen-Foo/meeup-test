@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import {load as loadProfile} from '../reducers/profileReducer'
 import FormTextInput from './FormTextInput';
 
-import FirebaseHelper from '../lib/FirebaseHelper'
+import FirebaseTool from '../lib/FirebaseTool'
 
 const data = {
   // used to populate "account" reducer when "Load" is clicked
