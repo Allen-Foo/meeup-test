@@ -1,15 +1,8 @@
 import React from 'react';
-import { Alert } from 'react-native';
-
-import { Provider } from 'react-redux';
-import * as reducers from '../reducers';
-import { createStore, combineReducers } from 'redux';
+import { StyleSheet, View } from 'react-native';
 
 import ProfileForm from '../components/ProfileForm';
 import FirebaseTool from '../lib/FirebaseTool'
-
-const reducer = combineReducers(reducers);
-const store = createStore(reducer);
 
 /**
  *
@@ -21,9 +14,20 @@ const store = createStore(reducer);
 export default class Profile extends React.Component {
   render() {
     return (
-      <Provider store={store}>
-        <ProfileForm onSubmit={(values) => FirebaseTool.updateProfile(values)}/>
-      </Provider>
+      <View style={styles.container}>
+        <ProfileForm 
+          initialValues={() => FirebaseTool.loadProfile()}
+          onSubmit={(values) => FirebaseTool.updateProfile(values)}
+        />
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: 25,
+  },
+});

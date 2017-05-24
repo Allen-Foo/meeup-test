@@ -6,21 +6,21 @@ import {
 
 import Profile from './app/pages/Profile'
 
+import { Provider } from 'react-redux';
+import * as reducers from './app/reducers';
+import { createStore, combineReducers } from 'redux';
+
+const reducer = combineReducers(reducers);
+const store = createStore(reducer);
+
 export default class App extends React.Component {
   
   render() {
     return (
-      <View style={styles.container}>
+      <Provider store={store}>
         <Profile />
-      </View>
-    );
+      </Provider>
+    )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: 25,
-  },
-});
