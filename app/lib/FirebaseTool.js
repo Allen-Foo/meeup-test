@@ -38,10 +38,7 @@ class FirebaseTool {
     // and then stops listening.
     this.itemsRef.once('value')
       .then((snap) => callback(snap.val()))
-      .catch((err) => console.warn('err', err))
-    // let profile = await this.itemsRef.once('value')
-    // console.warn('profile', profile)
-    // return profile.val()
+      .catch((err) => console.warn('error', err))
   }
 
   // Atomically modifies the data at this location.
@@ -56,7 +53,7 @@ class FirebaseTool {
       } else if (!committed) {
         console.warn('We aborted the transaction (because data already exists).');
       } else {
-        console.warn('User ada added!');
+        console.warn('profile updated!');
       }
       console.warn("profile: ", snapshot.val());
     });

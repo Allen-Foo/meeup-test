@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { ActivityIndicator, View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux'
@@ -20,11 +20,29 @@ const data = {
 }
 
 class ProfileForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: true
+    }
+  }
+
   componentWillMount() {
-    FirebaseTool.loadProfile(this.props.load);
+    FirebaseTool.loadProfile((profile) => {
+      this.setState({loading: false})
+      this.props.load(profile)
+    })
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={styles.loadingOverlay}>
+          <ActivityIndicator style={styles.activityIndicator} size='large' />
+        </View>
+      ) 
+    }
+
     return (
       <ScrollView keyboardShouldPersistTaps={'handled'}>
         <ProfileRow title={'First Name'} name={'first_name'}/>
@@ -99,7 +117,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 5,
     color: '#fff'
-  }
+  },
+  loadingOverlay: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  activityIndicator: {
+    padding: 8,
+  },
 });
 
 // reference: http://redux-form.com/6.7.0/examples/initializeFromState/
