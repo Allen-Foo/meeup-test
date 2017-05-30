@@ -1,3 +1,18 @@
+### Description
+
+![pic1](./pics/pic1.jpg) ![pic2](./pics/pic2.jpg) 
+
+1. This app consists of 1 view - the Profile. 
+There are 6 text inputs and a 'Save' button, as shown above.
+When the app launches for the very first time, all fields are empty."
+
+
+2. The user can enter as many or as little fields as she chooses.
+Pressing the 'Save' button will submit whatever the user has entered to the backend (using Firebase).
+The state (look and behaviour) of the UI should remain the same after the user has submitted the data."
+
+3. If the user closes and re-launches the app, the app should automatically fetch data (if any) from the backend and populate the form.
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
